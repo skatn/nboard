@@ -3,7 +3,9 @@ import {
   getFirestore,
   collection,
   getDocs,
+  getDoc,
   addDoc,
+  doc,
   Timestamp,
   query,
   orderBy,
@@ -40,6 +42,19 @@ function getBoards() {
   });
 }
 export { getBoards };
+
+function getBoardDetail(b_id) {
+  return new Promise((resolve, reject) => {
+    getDoc(doc(db, "board", b_id))
+      .then((snapshot) => {
+        resolve(snapshot.data());
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+export { getBoardDetail };
 
 function writeBoard(title, content, writer) {
   return new Promise((resolve, reject) => {

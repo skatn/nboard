@@ -2,13 +2,27 @@ import "./header.css";
 
 function Header() {
   return (
-    <div class="container">
-      <div class="row">
-        <div class="col-8 test">col-8</div>
-        <div class="col-4 test">col-4</div>
-        <div class="col-4 test">col-4</div>
+    <nav className="navbar navbar-light bg-light">
+      <div className="container">
+        <a className="navbar-brand" href="/">
+          <img
+            src="/docs/5.1/assets/brand/bootstrap-logo.svg"
+            alt=""
+            width="30"
+            height="24"
+          />
+          nboard
+        </a>
+        <div className="d-grid gap-2 d-md-flex justify-content-md-end">
+          <a className="btn btn-outline-primary me-md-2" href="/login">
+            Login
+          </a>
+          <a className="btn btn-primary" href="/signup">
+            Sign-up
+          </a>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 }
 

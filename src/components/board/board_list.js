@@ -14,9 +14,6 @@ function BoardList() {
 
   return (
     <div className="container">
-      <h1 className="text-center">
-        <a href="#">nBoard!</a>
-      </h1>
       <table className="table table-hover table-striped text-center">
         <thead>
           <tr>
@@ -28,8 +25,8 @@ function BoardList() {
         <tbody>
           {boards.map((board) => (
             <tr key={board.b_id}>
-              <td>
-                <a href="#">{board.b_title}</a>
+              <td className="col-md-10">
+                <a href={`/board/${board.b_id}`}>{board.b_title}</a>
               </td>
               <td>{board.b_writer}</td>
               <td>{board.b_read}</td>
