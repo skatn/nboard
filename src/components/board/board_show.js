@@ -1,6 +1,6 @@
 import moment from "moment";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getBoardDetail } from "../../firebase_config";
 
 function BoardShow() {
@@ -12,7 +12,6 @@ function BoardShow() {
     getBoardDetail(b_id)
       .then((board) => {
         setDetail({ ...board });
-        console.log(detail);
       })
       .catch((error) => {
         console.log(error);
@@ -20,32 +19,52 @@ function BoardShow() {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container mx-auto mt-4">
       {Object.keys(detail).length === 0 ? (
         <></>
       ) : (
-        <>
-          <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-            <a href="/" className="btn btn-primary" type="button">
+        <div className="flex flex-col">
+          <div className="py-2 flex flex-row-reverse gap-2">
+            <Link
+              to="/"
+              className="bg-violet-600 hover:bg-violet-500 border-violet-500  font-bold text-white px-4 py-2 border text-sm rounded-lg"
+            >
               목록
-            </a>
+            </Link>
+            <Link
+              to="#"
+              className="hover:bg-indigo-50 border-indigo-500 text-indigo-600 px-4 py-2 border text-sm rounded-lg"
+            >
+              다음글
+            </Link>
+            <Link
+              to="#"
+              className="hover:bg-indigo-50 border-indigo-500 text-indigo-600 px-4 py-2 border text-sm rounded-lg"
+            >
+              이전글
+            </Link>
           </div>
-          <div className="container border border-2 rounded-3">
-            <h1>{detail.b_title}</h1>
-            <div className="vstack gap-1 border-bottom">
-              <span>{detail.b_writer}</span>
-              <div className="hstack gap-3">
-                <span>
-                  {moment(new Date(detail.b_write_date.seconds * 1000)).format(
-                    "YYYY.MM.DD HH:mm:ss"
-                  )}
-                </span>
-                <span>{`조회 ${detail.b_read}`}</span>
+          <div className="container border rounded-md px-7 py-8">
+            <h1 className="text-5xl">{detail.b_title}</h1>
+            <div className="flex items-center gap-4 py-4 border-b-2 ">
+              <img className="h-10 rounded-full" src="/image/profile.png"></img>
+              <div className="flex flex-col">
+                <span className="text-base font-bold">{detail.b_writer}</span>
+                <div className="text-sm text-gray-500">
+                  <span>
+                    {moment(
+                      new Date(detail.b_write_date.seconds * 1000)
+                    ).format("YYYY.MM.DD HH:mm:ss")}
+                  </span>
+                  <span className="ml-3">{`조회 ${detail.b_read}`}</span>
+                </div>
               </div>
             </div>
-            <p style={{ whiteSpace: "pre-line" }}>{detail.b_content}</p>
+            <p className="py-2" style={{ whiteSpace: "pre-line" }}>
+              {detail.b_content}
+            </p>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
